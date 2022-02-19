@@ -1,16 +1,17 @@
 import {Review} from "../service/Review";
+import classes from "../modules/about-us.module.css";
 
 export const AboutUs = () => {
         return (
-            <main>
-                <section className={"container"}>
-
-                    <div className={"title"}>
-                        <h2>Reviews</h2>
-                        <div className={"underline"}></div>
+            <main className={classes['center-main']}>
+                <section className={classes.page}>
+                    <div className={classes.title}>
+                        <h2>CEO Of The Bank</h2>
+                        <div className={classes.underline}></div>
                     </div>
 
                     <Review />
+
                 </section>
             </main>
         );
