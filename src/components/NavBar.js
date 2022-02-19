@@ -5,8 +5,8 @@ import {NavLink} from "react-router-dom";
 const NavBar = () => {
 
     return(
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <Link className="navbar-brand" to="/">Bank System...</Link>
+        <nav className="navbar navbar-expand-lg  navbar-dark bg-dark">
+            <Link className="navbar-brand container" to="/">Bank System...</Link>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
                     <NavLink className="nav-item nav-link" to="/home">
