@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {FaChevronLeft, FaChevronRight, FaGithub} from "react-icons/fa";
 import person from "../service/Data";
+import classes from "../modules/about-us.module.css";
 
 export const Review = () => {
 
@@ -24,28 +25,28 @@ export const Review = () => {
     };
 
     return (
-        <article className={"review"}>
+        <article className={classes.review}>
 
-            <div className={"img-container"}>
-                <img src={image} alt={name} className={"person-img"}/>
-                <span className={"quote-icon"}>
+            <div className={classes['img-page']}>
+                <img src={image} alt={name} className={classes['person-img']}/>
+                <span className={classes['quote-icon']}>
                     <FaGithub/>
                 </span>
             </div>
-            <h2 className={"author"}>{name}</h2>
-            <h3 className={"job"}>{job}</h3>
-            <p className={"info"}>{text}</p>
+            <h2 className={classes.author}>{name}</h2>
+            <h3 className={classes.job}>{job}</h3>
+            <p className={classes.info}>{text}</p>
             <div>
-                <button className={"prev-btn"} onClick={() => prevReview(index)}>
+                <button className={classes['prev-btn']} onClick={() => prevReview(index)}>
                     <FaChevronLeft/>
                 </button>
 
-                <button className={"next-btn"} onClick={() => nextReview(index)}>
+                <button className={classes['next-btn']} onClick={() => nextReview(index)}>
                     <FaChevronRight/>
                 </button>
             </div>
 
-            <button className={"random-btn"} onClick={() => randomReview(index)}>Surprise Me</button>
+            <button className={classes['random-btn']} onClick={() => randomReview(index)}>Surprise Me</button>
 
         </article>
     );
