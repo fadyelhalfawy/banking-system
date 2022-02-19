@@ -1,17 +1,24 @@
 import React from "react";
-import image from "../images/bank.jpg";
+import classes from "../modules/home.module.css";
+import image from "../images/bank2.jpg";
 
 export const Home = () => {
     return(
-        <React.Fragment>
-            <div className="containers">
-                <img src={image} alt="BankImage"/>
-                    <div className="content">
-                        <h1>Welcome to our Bank System</h1>
-                        <p>We are the biggest Bank in the world!</p>
-                    </div>
+        <div className={classes.page}>
+            <img src={image} alt="Bank" />
+            <div className={classes.content}>
+                <h1>
+                    Welcome to our Bank System!
+                    <span></span>
+                </h1>
+                <p>We are the biggest Bank in the world!</p>
+                <a
+                    href='/about-us'
+                    className={classes['btn-custom']}
+                >
+                    Learn More
+                </a>{' '}
             </div>
-        </React.Fragment>
-
+        </div>
         )
 };
