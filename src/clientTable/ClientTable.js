@@ -7,7 +7,7 @@ export default class ClientTable extends Component {
 
         return(
             <DisplayTable
-                clients={clients}
+                data={clients}
                 columns={this.columns}
                 onSort={onSort}
                 sortColumn={sortColumn}

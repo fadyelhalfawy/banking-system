@@ -1,7 +1,9 @@
-export let filteredClients = (allClients, searchQuery) => {
-    let clients = allClients;
+export let filteredData = (allData, searchQuery, number) => {
+    let data = allData;
 
-    if (searchQuery) clients = allClients.filter(m => m.sender.toLowerCase().startsWith(searchQuery.toLowerCase()));
+    if (searchQuery && number === 0) data = allData.filter(d => d.name.toLowerCase().startsWith(searchQuery.toLowerCase()));
 
-    return clients;
+    else if (searchQuery && number === 1) data = allData.filter(d => d.sender.toLowerCase().startsWith(searchQuery.toLowerCase()));
+
+    return data;
 };

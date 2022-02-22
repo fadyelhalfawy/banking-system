@@ -1,13 +1,13 @@
 import _ from "lodash";
 import {Paginate} from "./Paginate";
-import {filteredClients} from "./FilteredClients";
+import {filteredData} from "./FilteredData";
 
-export const getPageData = (clients, pageSize, currentPage, sortColumn, searchQuery) => {
-    const clientsFiltered = filteredClients(clients, searchQuery);
+export const getPageData = (data, pageSize, currentPage, sortColumn, searchQuery, number) => {
+    const dataFiltered = filteredData(data, searchQuery, number);
 
-    const allClients = _.orderBy(clientsFiltered, [sortColumn.path], [sortColumn.order]);
+    const allData = _.orderBy(dataFiltered, [sortColumn.path], [sortColumn.order]);
 
-    const clientPaginate = Paginate(allClients, pageSize, currentPage);
+    const dataPaginate = Paginate(allData, pageSize, currentPage);
 
-    return ({ length: clientsFiltered.length, clientPaginate });
+    return ({ length: dataFiltered.length, dataPaginate });
 }

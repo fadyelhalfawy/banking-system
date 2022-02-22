@@ -1,7 +1,7 @@
 import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
 
-export const DisplayTable = ({ clients, columns, onSort, sortColumn }) => {
+export const DisplayTable = ({ data, columns, onSort, sortColumn }) => {
 
     return(
         <table className="table table-dark">
@@ -12,7 +12,7 @@ export const DisplayTable = ({ clients, columns, onSort, sortColumn }) => {
             />
 
             <TableBody
-                clients={clients}
+                data={data}
                 columns={columns}
             />
         </table>
