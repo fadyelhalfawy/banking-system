@@ -1,3 +1,4 @@
 {
-  "clientsPath": "http://localhost:3900/clients"
+  "clientsPath": "http://localhost:3900/clients",
+  "transactionsPath" : "http://localhost:3900/transactions"
 }
