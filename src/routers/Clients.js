@@ -8,6 +8,7 @@ import {getPageData} from "../helperFunctions/GetPageData";
 import {getClients} from "../service/ClientsService";
 import {SelectGenderForm} from "../components/SelectGenderForm";
 import InputForm from "../components/InputForm";
+import {addTransaction} from "../service/TransactionsService";
 
 export default class Clients extends Component {
     state = {
@@ -16,11 +17,17 @@ export default class Clients extends Component {
         pageSize: 5,
         currentPage: 1,
         sortColumn: {path: "name", order: 'asc'},
-        data: {money: ""},
+        data: {
+            sender: "",
+            receiver: "",
+            money: ""
+        },
         errors: {}
     };
 
     schema = {
+        sender: Joi.string().label("Sender"),
+        receiver: Joi.string().label("Receiver"),
         money: Joi.number().required().label("Money")
     };
 
@@ -31,7 +38,7 @@ export default class Clients extends Component {
 
     render() {
         const {clients, searchQuery, currentPage, pageSize, sortColumn, data, errors} = this.state;
-        const {length, clientPaginate} = getPageData(clients, pageSize, currentPage, sortColumn, searchQuery);
+        const {length, dataPaginate} = getPageData(clients, pageSize, currentPage, sortColumn, searchQuery, 0);
         const {history} = this.props;
         return (
             <div>
@@ -40,7 +47,7 @@ export default class Clients extends Component {
                     onChange={this.handleSearch}
                 />
                 <ClientTable
-                    clients={clientPaginate}
+                    clients={dataPaginate}
                     onSort={this.handleSort}
                     sortColumn={sortColumn}
                 />
@@ -55,13 +62,17 @@ export default class Clients extends Component {
                 <SelectGenderForm
                     id={"Client-1"}
                     label={"Sender"}
-                    clients={clientPaginate}
+                    value={data["sender"]}
+                    onChange={this.handleSenderChange}
+                    clients={dataPaginate}
                 />
 
                 <SelectGenderForm
                     id={"Client-2"}
                     label={"Receiver"}
-                    clients={clientPaginate}
+                    value={data["receiver"]}
+                    onChange={this.handleReceiverChange}
+                    clients={dataPaginate}
                 />
 
                 <InputForm
@@ -76,7 +87,7 @@ export default class Clients extends Component {
 
                 <button
                     className={"btn btn-outline-success btn-space"}
-                    disabled={this.validate()}
+                    disabled={false}
                     onClick={() => this.handleClickButton(history, "/transactions")}>
                     {"Send Money"}
                 </button>
@@ -129,5 +140,31 @@ export default class Clients extends Component {
         this.setState({data: getData, errors: getErrors});
     };
 
-    handleClickButton = (history, path) => history.push(path);
+    handleSenderChange = e => {
+        const {data} = this.state;
+        const getData = {...data};
+        getData.sender = e.target.value;
+        this.setState({data: getData});
+    }
+
+    handleReceiverChange = e => {
+        const {data} = this.state;
+        const getData = {...data};
+        getData.receiver = e.target.value;
+        this.setState({data: getData});
+    }
+
+    handleClickButton = async (history, path) => {
+        const { data, errors } = this.state;
+        try {
+            await addTransaction(data);
+            history.push(path);
+        }
+        catch (e) {
+            if (e.response && e.response.status === 400) {
+                const {error} = {...errors};
+                this.setState({errors: error});
+            }
+        }
+    }
 }
